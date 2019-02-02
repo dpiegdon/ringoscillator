@@ -1,0 +1,63 @@
+# Arachne-PNR PCF file for the iCEstick evaluation board
+# ------------------------------------------------------
+#
+# This is free and unencumbered software released into the public domain.
+#
+# Anyone is free to copy, modify, publish, use, compile, sell, or
+# distribute this software, either in source code form or as a compiled
+# binary, for any purpose, commercial or non-commercial, and by any
+# means.
+
+set_io --warn-no-port CLK 21
+
+# LEDs
+set_io --warn-no-port LED0 99
+set_io --warn-no-port LED1 98
+set_io --warn-no-port LED2 97
+set_io --warn-no-port LED3 96
+set_io --warn-no-port LED4 95
+
+# RS232
+set_io --warn-no-port DCDn 1
+set_io --warn-no-port DSRn 2
+set_io --warn-no-port DTRn 3
+set_io --warn-no-port CTSn 4
+set_io --warn-no-port RTSn 7
+set_io --warn-no-port TX   8
+set_io --warn-no-port RX   9
+
+# IrDA Transceiver
+set_io --warn-no-port IR_TX 105
+set_io --warn-no-port IR_RX 106
+set_io --warn-no-port IR_SD 107
+
+# J1 Connector  (Pin 1 = 3.3V, Pin 2 = Gnd)
+set_io --warn-no-port J1_3  112
+set_io --warn-no-port J1_4  113
+set_io --warn-no-port J1_5  114
+set_io --warn-no-port J1_6  115
+set_io --warn-no-port J1_7  116
+set_io --warn-no-port J1_8  117
+set_io --warn-no-port J1_9  118
+set_io --warn-no-port J1_10 119
+
+# J2 PMOD  (Pin 5 & 11 = Gnd, Pin 6 & 12 = 3.3V)
+set_io --warn-no-port J2_1  78
+set_io --warn-no-port J2_2  79
+set_io --warn-no-port J2_3  80
+set_io --warn-no-port J2_4  81
+set_io --warn-no-port J2_7  87
+set_io --warn-no-port J2_8  88
+set_io --warn-no-port J2_9  90
+set_io --warn-no-port J2_10 91
+
+# J3 Connector  (Pin 1 = 3.3V, Pin 2 = Gnd)
+set_io --warn-no-port J3_3  62
+set_io --warn-no-port J3_4  61
+set_io --warn-no-port J3_5  60
+set_io --warn-no-port J3_6  56
+set_io --warn-no-port J3_7  48
+set_io --warn-no-port J3_8  47
+set_io --warn-no-port J3_9  45
+set_io --warn-no-port J3_10 44
+
