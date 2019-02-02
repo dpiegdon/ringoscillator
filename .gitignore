@@ -1,3 +1,7 @@
-ringosc.bin
+ringosc.asc
 ringosc.blif
-ringosc.txt
+ringosc.json
+ringosc.rpt
+ringosc.bin
+*.swp
+.*.swp

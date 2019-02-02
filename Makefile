@@ -1,16 +1,30 @@
 
-ringosc.bin: ringosc.txt
-	icepack ringosc.txt ringosc.bin
+.PHONY: all prog clean
 
-ringosc.txt: ringosc.blif icestick.pcf
-	arachne-pnr -d 1k -o ringosc.txt -p icestick.pcf ringosc.blif
-
-ringosc.blif: ringosc.v
-	yosys -p 'synth_ice40 -blif ringosc.blif' ringosc.v
+all: ringosc.bin ringosc.rpt
 
 prog: ringosc.bin
 	iceprog ringosc.bin
 
 clean:
-	rm -fv ringosc.bin ringosc.txt ringosc.blif
+	rm -fv ringosc.bin ringosc.asc ringosc.blif ringosc.json
+
+ringosc.blif: ringosc.v
+	yosys -p 'synth_ice40 -blif ringosc.blif' ringosc.v
+
+ringosc.json: ringosc.v
+	yosys -p 'synth_ice40 -json ringosc.json' ringosc.v
+
+ringosc.asc: ringosc.blif icestick.pcf
+	arachne-pnr -d 1k -P tq144 -o ringosc.asc -p icestick.pcf $<
+
+#ringosc.asc: ringosc.json icestick.pcf
+#	nextpnr-ice40 --hx1k --package tq144 --pcf icestick.pcf --json $<
+
+ringosc.rpt: ringosc.asc
+	icetime -d hx1k -mtr ringosc.rpt ringosc.asc
+
+
+ringosc.bin: ringosc.asc
+	icepack ringosc.asc ringosc.bin
 
