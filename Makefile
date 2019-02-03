@@ -15,11 +15,11 @@ ringosc.blif: ringosc.v
 ringosc.json: ringosc.v
 	yosys -p 'synth_ice40 -json ringosc.json' ringosc.v
 
-ringosc.asc: ringosc.blif icestick.pcf
-	arachne-pnr -d 1k -P tq144 -o ringosc.asc -p icestick.pcf $<
+#ringosc.asc: ringosc.blif icestick.pcf
+#	arachne-pnr -d 1k -P tq144 -o ringosc.asc -p icestick.pcf $<
 
-#ringosc.asc: ringosc.json icestick.pcf
-#	nextpnr-ice40 --hx1k --package tq144 --pcf icestick.pcf --json $<
+ringosc.asc: ringosc.json icestick.pcf
+	nextpnr-ice40 --no-tmdriv --force --hx1k --package tq144 --pcf icestick.pcf --json $<
 
 ringosc.rpt: ringosc.asc
 	icetime -d hx1k -mtr ringosc.rpt ringosc.asc
