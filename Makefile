@@ -19,9 +19,8 @@ ringosc.json: ringosc.v
 #	arachne-pnr -d 1k -P tq144 -o ringosc.asc -p icestick.pcf $<
 
 ringosc.asc: ringosc.json icestick.pcf
-	# "--no-tmdriv --force" are required because nextpnr sees
-	# the combinatorial loop and raises an Error.
-	nextpnr-ice40 --no-tmdriv --force --hx1k --package tq144 --pcf icestick.pcf --json $< --asc $@
+	# "--force" is required because nextpnr sees the combinatorial loop and raises an error
+	nextpnr-ice40 --force --hx1k --package tq144 --pcf icestick.pcf --json $< --asc $@
 
 ringosc.rpt: ringosc.asc
 	icetime -d hx1k -mtr ringosc.rpt ringosc.asc
