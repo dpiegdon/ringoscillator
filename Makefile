@@ -1,31 +1,48 @@
 
+DEVICE=hx1k
+PACKAGE=tq144
+PCF=icestick.pcf
+
+
+
+
 .PHONY: all prog clean
 
-all: ringosc.bin ringosc.rpt
+.PRECIOUS: %.json %.asc %.bin %.rpt
 
-prog: ringosc.bin
-	iceprog ringosc.bin
+
+
+
+all: top.rpt
+
+prog: top.bin
+	iceprog $<
 
 clean:
-	rm -fv ringosc.bin ringosc.asc ringosc.blif ringosc.json
-
-ringosc.blif: ringosc.v
-	yosys -p 'synth_ice40 -blif ringosc.blif' ringosc.v
-
-ringosc.json: ringosc.v
-	yosys -p 'synth_ice40 -json ringosc.json' ringosc.v
-
-#ringosc.asc: ringosc.blif icestick.pcf
-#	arachne-pnr -d 1k -P tq144 -o ringosc.asc -p icestick.pcf $<
-
-ringosc.asc: ringosc.json icestick.pcf
-	# "--force" is required because nextpnr sees the combinatorial loop and raises an error
-	nextpnr-ice40 --force --hx1k --package tq144 --pcf icestick.pcf --json $< --asc $@
-
-ringosc.rpt: ringosc.asc
-	icetime -d hx1k -mtr ringosc.rpt ringosc.asc
+	-rm -f *.json
+	-rm -f *.asc
+	-rm -f *.bin
+	-rm -f *.rpt
 
 
-ringosc.bin: ringosc.asc
-	icepack ringosc.asc ringosc.bin
+
+
+top.json: top.v ringoscillator.v
+
+
+
+
+%.json: %.v
+	yosys -p 'synth_ice40 -top $(subst .v,,$<) -json $@' $^
+
+%.asc: %.json
+	# "--force" is required because nextpnr sees the combinatorial
+	# loop of a ringoscillator and raises an error
+	nextpnr-ice40 --force --$(DEVICE) --package $(PACKAGE) --pcf $(PCF) --json $< --asc $@
+
+%.bin: %.asc
+	icepack $< $@
+
+%.rpt: %.asc
+	icetime -d $(DEVICE) -mtr $@ $<
 

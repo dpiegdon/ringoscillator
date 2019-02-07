@@ -1,11 +1,8 @@
-`timescale 1ns / 1ps
 
-module top(input CLK, output J1_10, LED0, LED1, LED2, LED3, LED4);
-	// ring oscillator
-
+module ringoscillator(input CLK, output OUT);
 	wire chain_in, chain_out;
 
-	assign J1_10 = chain_out;
+	assign OUT = chain_out;
 	assign chain_in = !chain_out;
 
 	SB_LUT4 #(
@@ -18,3 +15,4 @@ module top(input CLK, output J1_10, LED0, LED1, LED2, LED3, LED4);
 		.I3(1'b0)
 	);
 endmodule
+
