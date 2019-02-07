@@ -1,5 +1,5 @@
 
-module ringoscillator(input CLK, output OUT);
+module ringoscillator(output OUT);
 	wire chain_in, chain_out;
 
 	assign OUT = chain_out;
