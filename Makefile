@@ -27,7 +27,7 @@ clean:
 
 
 
-top.json: top.v ringoscillator.v
+top.json: top.v ringoscillator.v lfsr_fibonacci.v
 
 
 
