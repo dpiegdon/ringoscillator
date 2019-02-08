@@ -1,4 +1,9 @@
 
+// implements a fibonacci 16-bit linear feedback shift register
+// that allows to shift additional random bits into the front
+// to improve its randomness.
+// NOTE that only after 16 clocks it will no longer contain data from the
+// previous cycle.
 module lfsr_fibonacci(input CLK, input reset, input random, output reg [0:15] out);
 
 	wire feedback;
