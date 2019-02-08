@@ -4,17 +4,20 @@
 // to improve its randomness.
 // NOTE that only after 16 clocks it will no longer contain data from the
 // previous cycle.
-module lfsr_fibonacci(input CLK, input reset, input random, output reg [0:15] out);
+module lfsr_fibonacci(input CLK, input random, output reg [0:15] lfsr);
 
 	wire feedback;
-	assign feedback = (random ^ out[10] ^ out[12] ^ out[13] ^ out[15]);
+	assign feedback = (random ^ lfsr[10] ^ lfsr[12] ^ lfsr[13] ^ lfsr[15]);
+	reg init_done = 0;
 	
 	always @ (posedge CLK)
 	begin
-		if(reset)
-			out <= 16'b1010_1100_1110_0001;
-		else
-			out <= {feedback, out[0:14]};
+		if(init_done) begin
+			lfsr <= {feedback, lfsr[0:14]};
+		end else begin
+			lfsr <= 16'b1010_1100_1110_0001;
+			init_done <= 1;
+		end
 	end
 
 endmodule

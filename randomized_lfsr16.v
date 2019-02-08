@@ -4,7 +4,7 @@
 // generate randomness via metastable state in a LUT.
 module randomized_lfsr16(input CLK, input reset, output wire [0:15] out);
 
-	wire random;
+	wire metastable;
 
 	wire s0, s1, s2, s3;
 
@@ -14,9 +14,9 @@ module randomized_lfsr16(input CLK, input reset, output wire [0:15] out);
 	ringoscillator r3(s3);
 
 	SB_LUT4 #(.LUT_INIT(16'b1010_1100_1110_0001))
-		destabilizer (.O(random), .I0(s0), .I1(s1), .I2(s2), .I3(s3));
+		destabilizer (.O(metastable), .I0(s0), .I1(s1), .I2(s2), .I3(s3));
 
-	lfsr_fibonacci fibo(CLK, 0, random, out);
+	lfsr_fibonacci lfsr(CLK, metastable, out);
 
 endmodule
 
