@@ -1,8 +1,9 @@
 
-module ringoscillator(output OUT);
+module ringoscillator(output out);
+
 	wire chain_in, chain_out;
 
-	assign OUT = chain_out;
+	assign out = chain_out;
 
 	// Single inverter of oscillator.
 	assign chain_in = !chain_out;
@@ -27,5 +28,6 @@ module ringoscillator(output OUT);
 	// pin has 625MHz with -25dBm, which is 35.56mVpp!
 	// So having a single LUT delay line here seems a good
 	// choice!
+
 endmodule
 

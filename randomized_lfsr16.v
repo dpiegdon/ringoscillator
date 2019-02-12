@@ -2,7 +2,7 @@
 // random number generator based on a 16 bit LFSR that is
 // seeded with multiple ring oscillators, which in turn
 // generate randomness via metastable state in a LUT.
-module randomized_lfsr16(input CLK, output wire [0:15] out, output wire metastable);
+module randomized_lfsr16(input clk, output wire [0:15] out, output wire metastable);
 
 	wire s0, s1, s2, s3;
 
@@ -14,7 +14,7 @@ module randomized_lfsr16(input CLK, output wire [0:15] out, output wire metastab
 	SB_LUT4 #(.LUT_INIT(16'b1010_1100_1110_0001))
 		destabilizer (.O(metastable), .I0(s0), .I1(s1), .I2(s2), .I3(s3));
 
-	lfsr_fibonacci lfsr(CLK, metastable, out);
+	lfsr_fibonacci lfsr(clk, metastable, out);
 
 endmodule
 
