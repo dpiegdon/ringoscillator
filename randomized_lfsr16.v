@@ -14,7 +14,7 @@ module randomized_lfsr16(input clk, output wire [0:15] out, output wire metastab
 	SB_LUT4 #(.LUT_INIT(16'b1010_1100_1110_0001))
 		destabilizer (.O(metastable), .I0(s0), .I1(s1), .I2(s2), .I3(s3));
 
-	lfsr_fibonacci lfsr(clk, metastable, out);
+	lfsr shiftreg(clk, metastable, out);
 
 endmodule
 
