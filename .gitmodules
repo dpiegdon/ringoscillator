@@ -1,0 +1,3 @@
+[submodule "buildingblocks"]
+	path = buildingblocks
+	url = git@github.com:dpiegdon/verilog-buildingblocks.git

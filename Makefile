@@ -27,7 +27,12 @@ clean:
 
 
 
-top.json: top.v randomized_lfsr16.v lfsr.v metastable_oscillator.v ringoscillator.v
+top.json: \
+	buildingblocks/randomized_lfsr16.v \
+	buildingblocks/lfsr.v \
+	buildingblocks/metastable_oscillator.v \
+	buildingblocks/ringoscillator.v \
+	top.v
 
 
 
