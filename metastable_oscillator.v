@@ -1,5 +1,8 @@
 `default_nettype none
 
+// Lattice ICE40 specific.
+// May also work for ECP5 when `defining SB_LUT4 to LUT4.
+
 // circuit generating a metastable output
 module metastable_oscillator(output wire metastable);
 
