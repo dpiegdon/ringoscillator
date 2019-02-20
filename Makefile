@@ -33,16 +33,16 @@ top.json: top.v randomized_lfsr16.v lfsr.v metastable_oscillator.v ringoscillato
 
 
 %.json: %.v
-	yosys -p 'synth_ice40 -top $(subst .v,,$<) -json $@' $^
+	yosys -Q -q -p 'synth_ice40 -top $(subst .v,,$<) -json $@' $^
 
 %.asc: %.json
-	# "--force" is required because nextpnr sees the combinatorial
-	# loop of a ringoscillator and raises an error
-	nextpnr-ice40 --force --$(DEVICE) --package $(PACKAGE) --pcf $(PCF) --json $< --asc $@
+	@# "--force" is required because nextpnr sees the combinatorial
+	@# loop of a ringoscillator and raises an error
+	nextpnr-ice40 -q --force --$(DEVICE) --package $(PACKAGE) --pcf $(PCF) --json $< --asc $@
 
 %.bin: %.asc
 	icepack $< $@
 
 %.rpt: %.asc
-	icetime -d $(DEVICE) -mtr $@ $<
+	icetime -p $(PCF) -P $(PACKAGE) -d $(DEVICE) -r $@ -m -t $<
 
