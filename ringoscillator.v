@@ -1,5 +1,6 @@
+`default_nettype none
 
-module ringoscillator(output out);
+module ringoscillator(output wire out);
 
 	wire chain_in, chain_out;
 

@@ -1,3 +1,4 @@
+`default_nettype none
 
 // circuit generating a metastable output
 module metastable_oscillator(output wire metastable);

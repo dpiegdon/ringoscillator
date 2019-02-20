@@ -1,5 +1,6 @@
+`default_nettype none
 
-module top(input CLK, output J1_10, output J1_8);
+module top(input wire CLK, output wire J1_10, output wire J1_8);
 
 	wire [0:15] lfsr;
 	wire metastable;
