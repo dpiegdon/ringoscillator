@@ -32,6 +32,8 @@ top.json: \
 	buildingblocks/lfsr.v \
 	buildingblocks/metastable_oscillator.v \
 	buildingblocks/ringoscillator.v \
+	buildingblocks/synchronous_reset_timer.v \
+	buildingblocks/uart.v \
 	top.v
 
 

@@ -8,7 +8,7 @@
 # binary, for any purpose, commercial or non-commercial, and by any
 # means.
 
-#
+# 12 MHz clock
 set_io --warn-no-port CLK 21
 #
 ## LEDs
@@ -24,8 +24,8 @@ set_io --warn-no-port CLK 21
 #set_io --warn-no-port DTRn 3
 #set_io --warn-no-port CTSn 4
 #set_io --warn-no-port RTSn 7
-#set_io --warn-no-port TX   8
-#set_io --warn-no-port RX   9
+set_io --warn-no-port TX   8
+set_io --warn-no-port RX   9
 #
 ## IrDA Transceiver
 #set_io --warn-no-port IR_TX 105
@@ -36,7 +36,7 @@ set_io --warn-no-port CLK 21
 #set_io --warn-no-port J1_3  112
 #set_io --warn-no-port J1_4  113
 #set_io --warn-no-port J1_5  114
-#set_io --warn-no-port J1_6  115
+set_io --warn-no-port J1_6  115
 #set_io --warn-no-port J1_7  116
 set_io --warn-no-port J1_8  117
 #set_io --warn-no-port J1_9  118
