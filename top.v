@@ -22,7 +22,7 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 
 	wire txReady;
 
-	uart #(.CLOCKFRQ(12000000), .BAUDRATE(1000000) ) uart(
+	uart #(.CLOCKFRQ(12000000), .BAUDRATE(4000000) ) uart(
 		.clk(CLK),
 		.rst(rst),
 		.rx(RX),
