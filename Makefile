@@ -28,9 +28,8 @@ clean:
 
 
 top.json: \
-	buildingblocks/randomized_lfsr16.v \
 	buildingblocks/lfsr.v \
-	buildingblocks/metastable_oscillator.v \
+	buildingblocks/random.v \
 	buildingblocks/ringoscillator.v \
 	buildingblocks/synchronous_reset_timer.v \
 	buildingblocks/uart.v \
