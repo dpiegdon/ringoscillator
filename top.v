@@ -15,20 +15,27 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 
 	wire [15:0] lfsr;
 	wire metastable;
-	randomized_lfsr16 lfsr16_generator(CLK, lfsr, metastable);
+	randomized_lfsr16 lfsr16_generator(CLK, lfsr, metastable, rst);
 
 	assign J1_10 = lfsr[0];
 	assign J1_8 = metastable;
 
-	wire txReady;
+	wire txFree;
+	wire dataReady;
 
-	uart #(.CLOCKFRQ(12000000), .BAUDRATE(4000000) ) uart(
+	// make sure there is no overlap in the data we get out of the LFSR.
+	reg [5:0] clkdiv32;
+	always @ (posedge CLK) begin
+		clkdiv32 = clkdiv32+1;
+	end
+
+	uart #(.CLOCKFRQ(12000000), .BAUDRATE(500000) ) uart(
 		.clk(CLK),
 		.rst(rst),
 		.rx(RX),
 		.tx(TX),
-		.transmit(txReady),
-		.tx_free(txReady),
+		.transmit(txFree & |clkdiv32),
+		.tx_free(txFree),
 		.tx_byte(lfsr[7:0]),
 		.received(uart_received),
 		.rx_byte(uart_rxByte),
