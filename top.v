@@ -13,9 +13,9 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 
 	wire [15:0] lfsr;
 	wire metastable;
-	wire bit_clk;
-	wire word_clk;
-	randomized_lfsr randomized_lfsr(CLK, rst, bit_clk, word_clk, lfsr, metastable);
+	wire bit_ready;
+	wire word_ready;
+	randomized_lfsr randomized_lfsr(CLK, rst, bit_ready, word_ready, lfsr, metastable);
 
 	wire txFree;
 	wire dataReady;
@@ -25,7 +25,7 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 		.rst(rst),
 		.rx(RX),
 		.tx(TX),
-		.transmit(txFree & word_clk),
+		.transmit(txFree & word_ready),
 		.tx_free(txFree),
 		.tx_byte(lfsr[7:0]),
 		.received(uart_received),
@@ -37,8 +37,8 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 
 	assign J1_10 = metastable;
 	assign J1_8 = lfsr[0];
-	assign J1_6 = bit_clk;
-	assign J1_4 = word_clk;
+	assign J1_6 = bit_ready;
+	assign J1_4 = word_ready;
 
 endmodule
 
