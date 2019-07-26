@@ -21,7 +21,7 @@ prog: top.bin
 	iceprog $<
 
 run_tests: $(TESTS)
-	make -C buildingblocks run_tests
+	make -C verilog-buildingblocks run_tests
 	@for test in $^; do \
 		echo $$test; \
 		./$$test; \
@@ -53,11 +53,11 @@ clean:
 
 
 top.json: \
-	buildingblocks/ringoscillator.v \
-	buildingblocks/lfsr.v \
-	buildingblocks/random.v \
-	buildingblocks/synchronous_reset_timer.v \
-	buildingblocks/uart.v \
+	verilog-buildingblocks/ringoscillator.v \
+	verilog-buildingblocks/lfsr.v \
+	verilog-buildingblocks/random.v \
+	verilog-buildingblocks/synchronous_reset_timer.v \
+	verilog-buildingblocks/uart.v \
 	top.v
 
 
@@ -70,9 +70,7 @@ top.json: \
 	yosys -Q $(QUIET) -p 'synth_ice40 -top $(subst .v,,$<) -json $@' $^
 
 %.asc: %.json
-	@# "--force" is required because nextpnr sees the combinatorial
-	@# loop of a ringoscillator and raises an error
-	nextpnr-ice40 $(QUIET) --force --$(DEVICE) --package $(PACKAGE) --pcf $(PCF) --json $< --asc $@
+	nextpnr-ice40 $(QUIET) --ignore-loops --$(DEVICE) --package $(PACKAGE) --pcf $(PCF) --json $< --asc $@
 
 %.bin: %.asc
 	icepack $< $@
