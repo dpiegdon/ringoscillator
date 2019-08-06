@@ -1,4 +1,7 @@
 
+#DEVICE=lp384
+#PACKAGE=qn32
+#PCF=lp384.pcf
 DEVICE=hx1k
 PACKAGE=tq144
 PCF=icestick.pcf
