@@ -2,8 +2,11 @@
 
 module top(input wire CLK,
 	output wire J1_10, 
+	output wire J1_9, 
 	output wire J1_8,
+	output wire J1_7,
 	output wire J1_6,
+	output wire J1_5,
 	output wire J1_4,
 	output wire J1_3,
 	input wire RX,
@@ -41,14 +44,27 @@ module top(input wire CLK,
 		.recv_error()
 	);
 
-	wire ringosci_out;
-	ringoscillator ringosci(ringosci_out);
+	wire ringosci_insane_out;
+	ringoscillator #(.DELAY_LUTS(0))
+		ringosci_insane(ringosci_insane_out);
+
+	wire ringosci_fast_out;
+	ringoscillator #(.DELAY_LUTS(1))
+		ringosci_fast(ringosci_fast_out);
+
+	wire ringosci_slow_out;
+	ringoscillator #(.DELAY_LUTS(20))
+		ringosci_slow(ringosci_slow_out);
 
 	assign J1_10 = metastable;
-	assign J1_8 = lfsr[0];
-	assign J1_6 = bit_ready;
-	assign J1_4 = word_ready;
-	assign J1_3 = ringosci_out;
+
+	assign J1_9 = lfsr[0];
+	assign J1_8 = bit_ready;
+	assign J1_7 = word_ready;
+	assign J1_6 = 0;
+	assign J1_5 = ringosci_insane_out;
+	assign J1_4 = ringosci_fast_out;
+	assign J1_3 = ringosci_slow_out;
 
 endmodule
 
