@@ -17,7 +17,7 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 	wire word_ready;
 	randomized_lfsr randomized_lfsr(CLK, rst, bit_ready, word_ready, lfsr, metastable);
 
-	wire txFree;
+	wire is_transmitting;
 	wire dataReady;
 
 	uart #(.CLOCKFRQ(12000000), .BAUDRATE(3000000) ) uart(
@@ -25,13 +25,12 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 		.rst(rst),
 		.rx(RX),
 		.tx(TX),
-		.transmit(txFree & word_ready),
-		.tx_free(txFree),
+		.transmit(!is_transmitting & word_ready),
 		.tx_byte(lfsr[7:0]),
 		.received(uart_received),
 		.rx_byte(uart_rxByte),
 		.is_receiving(),
-		.is_transmitting(),
+		.is_transmitting(is_transmitting),
 		.recv_error()
 	);
 
