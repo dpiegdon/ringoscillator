@@ -1,6 +1,13 @@
 `default_nettype none
 
-module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6, output wire J1_4, input wire RX, output wire TX);
+module top(input wire CLK,
+	output wire J1_10, 
+	output wire J1_8,
+	output wire J1_6,
+	output wire J1_4,
+	output wire J1_3,
+	input wire RX,
+	output wire TX);
 
 	wire [7:0] uart_rxByte;
 	wire uart_received;
@@ -34,10 +41,14 @@ module top(input wire CLK, output wire J1_10, output wire J1_8, output wire J1_6
 		.recv_error()
 	);
 
+	wire ringosci_out;
+	ringoscillator ringosci(ringosci_out);
+
 	assign J1_10 = metastable;
 	assign J1_8 = lfsr[0];
 	assign J1_6 = bit_ready;
 	assign J1_4 = word_ready;
+	assign J1_3 = ringosci_out;
 
 endmodule
 
