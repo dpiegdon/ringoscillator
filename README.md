@@ -4,7 +4,13 @@ FPGA Random number generator
 
 Generate random numbers on an FPGA using ringoscillators.
 
-Example for Lattice ice40 FPGA on "icestick".
+Example for Lattice parts:
+(pick your poison in the Makefile)
+
+* iCE40HX1K on "icestick" development board
+* iCE40LP384 (custom board)
+* LFE5UM5G-85F-8BG381 on "LFE5UM5G-85F-EVN" development board
+
 
 Generates a metastable signal and uses this for random number generation.
 Random data is sifted through a 16 bit LFSR to reduce effect of low entropy regions.
