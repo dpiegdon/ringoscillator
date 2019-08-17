@@ -3,6 +3,8 @@
 *.json
 *.rpt
 *.bin
+*.svf
+*.txtcfg
 *.swp
 .*.swp
 random.raw
