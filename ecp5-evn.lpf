@@ -1,10 +1,15 @@
 
-# A10 is 12MHz clock from FTDI FT2232H.
-# Y19/W20 are 200MHz SERDES clock from X2.
-# B11 is 50 MHz clock from X5 right next to Lattice part.
-
+# 12MHz clock from FTDI FT2232H.
 LOCATE COMP "CLK" SITE "A10";
-IOBUF PORT "clk" IO_TYPE=LVCMOS33;
+IOBUF PORT "CLK" IO_TYPE=LVCMOS33;
+
+
+# 50 MHz clock from X5 right next to Lattice part.
+#LOCATE COMP "CLK50" SITE "B11";
+#IOBUF PORT "CLK50" IO_TYPE=LVCMOS33;
+#
+#LOCATE COMP "CLK50_ENABLE" SITE "C11";
+#IOBUF PORT "CLK50_ENABLE" IO_TYPE=LVCMOS33;
 
 
 LOCATE COMP "led[0]" SITE "A13";
