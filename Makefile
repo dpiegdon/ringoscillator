@@ -36,7 +36,7 @@ prog: $(BITSTREAM)
 ifeq ($(ARCH),ice40)
 	iceprog $<
 else ifeq ($(ARCH),ecp5)
-	openocd -f ecp5-evn.openocd.conf -c "transport select jtag; init; svf $<; exit"
+	openocd -f ecp5-evn.openocd.conf -c "transport select jtag; init; svf progress quiet $<; exit"
 else
 	false
 endif
