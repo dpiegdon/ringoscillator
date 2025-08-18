@@ -53,7 +53,7 @@ run_tests: $(TESTS)
 randomness_test:
 	# requires tools from NIST Entropy Assessment,
 	# see https://github.com/usnistgov/SP800-90B_EntropyAssessment
-	socat file:/dev/ttyUSB1,b3000000,cs8,rawer,ignoreeof STDOUT | dd bs=128 count=8192 iflag=fullblock > random.raw
+	socat file:/dev/ttyUSB1,b3000000,cs8,raw,ignoreeof STDOUT | dd bs=128 count=8192 iflag=fullblock > random.raw
 	ea_non_iid -i -a -v random.raw 8
 	ea_iid -i -a -v random.raw 8
 	ea_non_iid -c -a -v random.raw 8
