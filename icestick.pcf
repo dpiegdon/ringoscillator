@@ -12,11 +12,11 @@
 set_io --warn-no-port CLK 21
 #
 ## LEDs
-#set_io --warn-no-port LED0 99
-#set_io --warn-no-port LED1 98
-#set_io --warn-no-port LED2 97
-#set_io --warn-no-port LED3 96
-#set_io --warn-no-port LED4 95
+set_io --warn-no-port LED0 99
+set_io --warn-no-port LED1 98
+set_io --warn-no-port LED2 97
+set_io --warn-no-port LED3 96
+set_io --warn-no-port LED4 95
 #
 ## RS232
 #set_io --warn-no-port DCDn 1

@@ -22,6 +22,8 @@ TIMINGREPORT=top_ice40.rpt
 
 #QUIET=-q
 
+UARTDEV=/dev/serial/by-id/usb-Lattice_Lattice_FTUSB_Interface_Cable-if01-port0
+
 TESTBENCHES=$(wildcard *_tb.v)
 TESTS=$(TESTBENCHES:%.v=%.test)
 
@@ -53,11 +55,16 @@ run_tests: $(TESTS)
 randomness_test:
 	# requires tools from NIST Entropy Assessment,
 	# see https://github.com/usnistgov/SP800-90B_EntropyAssessment
-	socat file:/dev/ttyUSB1,b3000000,cs8,raw,ignoreeof STDOUT | dd bs=128 count=8192 iflag=fullblock > random.raw
+	socat file:$(UARTDEV),b3000000,cs8,raw,ignoreeof,echo=0 STDOUT | dd bs=128 count=8192 iflag=fullblock > random.raw
 	ea_non_iid -i -a -v random.raw 8
 	ea_iid -i -a -v random.raw 8
 	ea_non_iid -c -a -v random.raw 8
 	ea_iid -c -a -v random.raw 8
+
+
+source_randomness:
+	socat -u file:/dev/ttyUSB1,b3000000,cs8,raw,echo=0 stdout | tee /dev/random | pv > /dev/null rr&
+	socat -u stdin,raw,echo=0,icanon=0 file:/dev/ttyUSB1,b3000000,cs8,raw,echo=0
 
 
 clean:
