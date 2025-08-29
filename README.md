@@ -30,4 +30,4 @@ Related work
   - [Slides for above](https://www.iacr.org/workshops/ches/ches2011/presentations/Session%201/CHES2011_Session1_2.pdf)
   - [FPGA PUF using programmable delay lines](https://www.researchgate.net/publication/224218293_FPGA_PUF_using_programmable_delay_lines)
   - [Ring Oscillator PUF Design and Results](http://class.ece.iastate.edu/cpre583/project_presentations/PUFs_report.pdf)
-
+  - [Slides on Digital PLLs](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)
