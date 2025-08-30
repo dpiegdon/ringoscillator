@@ -31,3 +31,4 @@ Related work
   - [FPGA PUF using programmable delay lines](https://www.researchgate.net/publication/224218293_FPGA_PUF_using_programmable_delay_lines)
   - [Ring Oscillator PUF Design and Results](http://class.ece.iastate.edu/cpre583/project_presentations/PUFs_report.pdf)
   - [Slides on Digital PLLs](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)
+  - [Building a Simple Logic PLL](https://zipcpu.com/dsp/2017/12/14/logic-pll.html)
