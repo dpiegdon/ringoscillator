@@ -1,5 +1,17 @@
 `default_nettype none
 
+`include "verilog-buildingblocks/synchronous_reset_timer.v"
+`include "verilog-buildingblocks/uart.v"
+	`include "verilog-buildingblocks/random.v"
+`ifdef ARCH_ice40
+	`include "verilog-buildingblocks/lattice_ice40/ringoscillator.v"
+	`include "verilog-buildingblocks/lattice_ice40/random.v"
+`endif
+`ifdef ARCH_ecp5
+	`include "verilog-buildingblocks/lattice_ecp5/ringoscillator.v"
+	`include "verilog-buildingblocks/lattice_ecp5/random.v"
+`endif
+
 module top(input wire CLK,
 	output wire J1_10, 
 	output wire J1_9, 
