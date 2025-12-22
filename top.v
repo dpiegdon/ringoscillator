@@ -2,14 +2,14 @@
 
 `include "verilog-buildingblocks/synchronous_reset_timer.v"
 `include "verilog-buildingblocks/uart.v"
-	`include "verilog-buildingblocks/random.v"
+	`include "verilog-buildingblocks/randomized_lfsr.v"
 `ifdef ARCH_ice40
 	`include "verilog-buildingblocks/lattice_ice40/ringoscillator.v"
-	`include "verilog-buildingblocks/lattice_ice40/random.v"
+	`include "verilog-buildingblocks/lattice_ice40/metastable_oscillator_depth2.v"
 `endif
 `ifdef ARCH_ecp5
 	`include "verilog-buildingblocks/lattice_ecp5/ringoscillator.v"
-	`include "verilog-buildingblocks/lattice_ecp5/random.v"
+	`include "verilog-buildingblocks/lattice_ecp5/metastable_oscillator_depth2.v"
 `endif
 
 module top(input wire CLK,
